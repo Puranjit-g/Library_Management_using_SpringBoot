@@ -72,8 +72,38 @@ The application follows a standard layered Spring Boot architecture:
 ## Entity-Relationship Diagram
 
 ```mermaid
-graph TD
-    A[User] --> B[Book]
+erDiagram
+    USER ||--o{ BOOK : issues
+    USER ||--o{ TRANSACTION : makes
+    AUTHOR ||--o{ BOOK : writes
+    BOOK ||--o{ TRANSACTION : has
+
+    USER {
+        int id
+        string name
+        string email
+        string phoneNo
+    }
+
+    AUTHOR {
+        int id
+        string name
+        string email
+    }
+
+    BOOK {
+        int id
+        string title
+        string bookNo
+        int securityAmount
+    }
+
+    TRANSACTION {
+        int id
+        string txnId
+        string txnStatus
+        int settlementAmount
+    }
 ```
 
 ---
@@ -88,8 +118,8 @@ server.port=8081
 
 # Database Configuration
 spring.datasource.url=jdbc:mysql://localhost:3306/JBD-MINOR1?createDatabaseIfNotExist=true
-spring.datasource.username=root
-spring.datasource.password=your_password
+spring.datasource.username=[DATABASE_USERNAME]
+spring.datasource.password=[DATABASE_PASSWORD]
 spring.jpa.hibernate.ddl-auto=update
 spring.jpa.show-sql=true
 spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL8Dialect
@@ -103,9 +133,9 @@ student.authority=STUDENT
 admin.authority=ADMIN
 
 # Redis Cache Settings
-redis.host=host_address
-redis.port=port_no
-redis.password=host_password
+redis.host=[HOST_ADDRESS]
+redis.port=[REDIS_PORT]
+redis.password=[REDIS_PASSWORD]
 redis.user.details.timeout=600000
 ```
 
