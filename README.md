@@ -72,55 +72,8 @@ The application follows a standard layered Spring Boot architecture:
 ## Entity-Relationship Diagram
 
 ```mermaid
-erDiagram
-    USER ||--o{ BOOK : "issues"
-    USER ||--o{ TXN : "makes"
-    AUTHOR ||--o{ BOOK : "writes"
-    BOOK ||--o{ TXN : "belongs to"
-
-    USER {
-        int id PK
-        string name
-        string email UK
-        string phoneNo UK
-        string password
-        string authorities
-        UserType userType
-        UserStatus userStatus
-        datetime createdOn
-        datetime updatedOn
-    }
-
-    AUTHOR {
-        int id PK
-        string name
-        string email UK
-        datetime createdOn
-        datetime updatedOn
-    }
-
-    BOOK {
-        int id PK
-        string title
-        string bookNo UK
-        BookType bookType
-        int securityAmount
-        int user_id FK
-        int author_id FK
-        datetime createdOn
-        datetime updatedOn
-    }
-
-    TXN {
-        int id PK
-        string txnId
-        TxnStatus txnStatus
-        int settlementAmount
-        int user_id FK
-        int book_id FK
-        datetime createdOn
-        datetime updatedOn
-    }
+graph TD
+    A[User] --> B[Book]
 ```
 
 ---
